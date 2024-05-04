@@ -1,4 +1,5 @@
 import { IRequest } from "itty-router"
+import { StatusCodes } from 'http-status-codes'
 import { Bundle } from "../pkg/bundle/bundle"
 import config from "./config"
 
@@ -18,10 +19,8 @@ export default async function hello(
         path: `${config.base}${config.hello}`,
         params: params
     })
-    
-    if (params.name == undefined) {
-        return new Response('Hello World!')
-    }
 
-    return new Response(`Hello ${params.name}!`, { status: 200 })
+    const phrase = (params.name == undefined) ? 'Hello World!' : `Hello ${params.name}!`
+
+    return new Response(phrase, { status: StatusCodes.OK })
 }
