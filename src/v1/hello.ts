@@ -2,6 +2,7 @@ import { IRequest } from "itty-router"
 import { Bundle } from "../pkg/bundle/bundle"
 import config from "./config"
 
+// You can export this.
 interface HelloParams {
     name: string
 }
@@ -22,5 +23,5 @@ export default async function hello(
         return new Response('Hello World!')
     }
 
-    return new Response(`Hello ${params.name}!`)
+    return new Response(`Hello ${params.name}!`, { status: 200 })
 }
