@@ -10,9 +10,17 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
+import { Bundle } from "./pkg/bundle/bundle"
+import router from "./router";
 
 export default {
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return new Response('Hello World!');
+	async fetch(
+		request: Request,
+		env: Env,
+		ctx: ExecutionContext,
+	): Promise<Response> {
+		const bundle: Bundle = {}
+
+		return router.fetch(request, env, ctx, bundle)
 	},
 };
