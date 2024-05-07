@@ -11,7 +11,9 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 import { Bundle } from "./pkg/bundle/bundle"
-import router from "./router";
+import router from "./router"
+import logger from "./pkg/logger/logger"
+import { getLogBase } from "./pkg/logger/format";
 
 export default {
 	async fetch(
@@ -19,13 +21,23 @@ export default {
 		env: Env,
 		ctx: ExecutionContext,
 	): Promise<Response> {
-		const bun: Bundle = {}
+		const logBase = getLogBase(new URL(request.url).pathname)
 
 		switch (env.WHICH_ENV) {
 		case 'dev':
-			return router.dev.fetch(request, env, ctx, bun)
+			{
+				const bun: Bundle = {
+					logger: logger.dev.child(logBase)
+				}
+				return router.dev.fetch(request, env, ctx, bun)
+			}
 		default:
-			return router.pro.fetch(request, env, ctx, bun)
+			{
+				const bun: Bundle = {
+					logger: logger.pro.child(logBase)
+				}
+				return router.pro.fetch(request, env, ctx, bun)
+			}
 		}
 	},
-};
+}

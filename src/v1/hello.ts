@@ -2,8 +2,9 @@ import { IRequest } from "itty-router"
 import { StatusCodes } from 'http-status-codes'
 import { Bundle } from "../pkg/bundle/bundle"
 import config from "./config"
+import { getLogContent } from "../pkg/logger/format"
 
-// You can export this.
+// Export this to use at tests
 interface HelloParams {
     name: string
 }
@@ -15,10 +16,8 @@ export default async function hello(
     bun: Bundle,
 ): Promise<Response> {
     const params = request.params as unknown as HelloParams
-    console.log({
-        path: `${config.base}${config.hello}`,
-        params: params
-    })
+
+    bun.logger.debug(getLogContent('params', params))
 
     const phrase = (params.name == undefined) ? 'Hello World!' : `Hello ${params.name}!`
 
