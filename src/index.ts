@@ -19,13 +19,13 @@ export default {
 		env: Env,
 		ctx: ExecutionContext,
 	): Promise<Response> {
-		const bundle: Bundle = {}
+		const bun: Bundle = {}
 
 		switch (env.WHICH_ENV) {
 		case 'dev':
-			return router.dev.fetch(request, env, ctx, bundle)
+			return router.dev.fetch(request, env, ctx, bun)
 		default:
-			return router.pro.fetch(request, env, ctx, bundle)
+			return router.pro.fetch(request, env, ctx, bun)
 		}
 	},
 };
