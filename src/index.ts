@@ -21,6 +21,11 @@ export default {
 	): Promise<Response> {
 		const bundle: Bundle = {}
 
-		return router.fetch(request, env, ctx, bundle)
+		switch (env.WHICH_ENV) {
+		case 'dev':
+			return router.dev.fetch(request, env, ctx, bundle)
+		default:
+			return router.pro.fetch(request, env, ctx, bundle)
+		}
 	},
 };
