@@ -2,20 +2,20 @@ import { AutoRouter, IRequest, cors } from "itty-router"
 import configV1 from "./v1/config"
 import routerV1 from "./v1/router"
 import { Bundle } from "./pkg/bundle/bundle"
-import { getLogContent } from "./pkg/logger/format"
+import { logContent } from "./pkg/logger/log"
 
 /**
  *	Request logger
  */
 function logRequest(request: Request, _: Env, __: ExecutionContext, bun: Bundle) {
-	bun.logger.info(getLogContent('request', request))
+	bun.logger.info(logContent('request', request))
 }
 
 /**
  *	Response logger
  */
 function logResponse(response: Response, _: IRequest, __: Env, ___: ExecutionContext, bun: Bundle) {
-	bun.logger.info(getLogContent('response', response))
+	bun.logger.info(logContent('response', response))
 }
 
 /**
