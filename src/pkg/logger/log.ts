@@ -11,7 +11,7 @@ interface LogContent {
     data: any
 }
 
-export type LogEvent =
+type LogEvent =
     'request' |
     'response' |
     'params'
