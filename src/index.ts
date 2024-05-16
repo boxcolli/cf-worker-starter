@@ -13,7 +13,7 @@
 import { Bundle } from "./pkg/bundle/bundle"
 import router from "./router"
 import logger from "./pkg/logger/logger"
-import { getLogBase } from "./pkg/logger/format";
+import { logBase } from "./pkg/logger/log";
 
 export default {
 	async fetch(
@@ -21,20 +21,20 @@ export default {
 		env: Env,
 		ctx: ExecutionContext,
 	): Promise<Response> {
-		const logBase = getLogBase(new URL(request.url).pathname)
+		const logString = logBase(new URL(request.url).pathname)
 
 		switch (env.WHICH_ENV) {
 		case 'dev':
 			{
 				const bun: Bundle = {
-					logger: logger.dev.child(logBase)
+					logger: logger.dev.child(logString)
 				}
 				return router.dev.fetch(request, env, ctx, bun)
 			}
 		default:
 			{
 				const bun: Bundle = {
-					logger: logger.pro.child(logBase)
+					logger: logger.pro.child(logString)
 				}
 				return router.pro.fetch(request, env, ctx, bun)
 			}
