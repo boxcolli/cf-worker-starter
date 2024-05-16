@@ -11,6 +11,11 @@ interface LogContent {
     data: any
 }
 
+export type LogEvent =
+    'request' |
+    'response' |
+    'params'
+
 export function logBase(path: string): LogBase {
     return {
         qid: getId(),
@@ -18,7 +23,7 @@ export function logBase(path: string): LogBase {
     }
 }
 
-export function logContent(event: string, data: any): LogContent {
+export function logContent(event: LogEvent, data: any): LogContent {
     return {
         time: Date.now(),
         event: event,
