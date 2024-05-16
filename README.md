@@ -3,6 +3,12 @@
 A simple opinionated template for cloudflare worker project.
 Feel free to copy & modify.
 
+## Install
+```
+$ gh repo clone boxcolli/cf-worker-starter
+$ npm i
+```
+
 ## Demo
 - https://cf-worker-demo.boxcolli.com
 - https://cf-worker-demo.boxcolli.com/v1/hello
