@@ -3,11 +3,16 @@
 A simple opinionated template for cloudflare worker project.
 Feel free to copy & modify.
 
-## Install
-```
-$ gh repo clone boxcolli/cf-worker-starter
-$ npm i
-```
+## How to use
+1. Download
+  ```
+  $ gh repo clone boxcolli/cf-worker-starter
+  $ npm i
+  ```
+
+2. Update gitignore list (those are written as comment initially):
+- `.dev.vars`
+- `.env.vitest`
 
 ## Demo
 - https://cf-worker-demo.boxcolli.com
@@ -18,7 +23,7 @@ $ npm i
 
 ### Staging
 
-There is 'pro' environment along with the default environment. Each time you add an element in `wrangler.toml`, you should configure both.
+There are two environments: default and 'pro'. Each time you add an element in `wrangler.toml`, you should configure both, like below:
 ```toml
 # /wrangler.toml
 ...
@@ -30,7 +35,7 @@ WHICH_ENV = "dev"
 WHICH_ENV = "pro"
 ```
 
-And when you deploy, you run `$ npm run deploy`, which is:
+If you want to deploy, you run `$ npm run deploy`, which actually is:
 ```json
 // package.json
 {
@@ -39,6 +44,10 @@ And when you deploy, you run `$ npm run deploy`, which is:
   },
 }
 ```
+
+About `Secrets`, configure:
+- `.dev.vars` file for development
+- `npx wrangler secret put <KEY> -e pro` for production.
 
 ### CORS
 

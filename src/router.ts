@@ -36,7 +36,10 @@ function getRouter(origin: string) {
 		finally: [corsify, logResponse],
 	})
 		.all(`${configV1.base}/*`, routerV1.fetch)
-        .all('*', (_, env) => new Response(`I am in ${env.WHICH_ENV}`, { status: 404 }))
+        .all('*', (_, env) => new Response(JSON.stringify({
+			WHICH_ENV: env.WHICH_ENV,
+			MY_SECRET: env.MY_SECRET,
+		}, null, 2), { status: 404 }))
 }
 
 export default {

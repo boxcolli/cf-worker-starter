@@ -1,7 +1,7 @@
 import { getId } from "./id"
 
 interface LogBase {
-    qid: string     // request id
+    id: string     // request id
     path: string
 }
 
@@ -18,7 +18,7 @@ type LogEvent =
 
 export function logBase(path: string): LogBase {
     return {
-        qid: getId(),
+        id: getId(),
         path: path,
     }
 }
