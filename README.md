@@ -47,7 +47,7 @@ If you want to deploy, you run `$ npm run deploy`, which actually is:
 
 About `Secrets`, configure:
 - `.dev.vars` file for development
-  - `$ npx wrangler types` will detect this as well.
+  - `$ npx wrangler types` will detect it as well.
 - `npx wrangler secret put <KEY> -e pro` for production.
 
 ### CORS
