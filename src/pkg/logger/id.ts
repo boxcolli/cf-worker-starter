@@ -1,6 +1,12 @@
+/**
+ * getId is a id generator that provides a unique tag for each
+ * request. When there are many fragmented logs from concurrent
+ * requensts, it will help recognize which logs belong to which
+ * request.
+ */
 export function getId(): string {
     /**
-     *  11 digits from unix millisecond time
+     *  11 hex digits from unix millisecond time
      *
      *  | unix millisec   | date         | hexadecimal   | digits |
      *  |----------------:|-------------:|--------------:|-------:|
@@ -9,12 +15,12 @@ export function getId(): string {
      *  | `9999999999999` | `2286.11.20` | `9184E729FFF` | 11     |
      *
      *  @description
-     *  11 digits will be enough.
+     *  11 digits will be enough up to 22th century
      */
     const timestamp = Date.now().toString(16).padStart(11, '0');
 
     /**
-     *  8 hex digits (32 bits) from uuidv4
+     *  8 hex digits (32 bits) from random string (uuidv4)
      *
      *  2^32 / 1 ms
      *   = 2^32*1000 / 1s
