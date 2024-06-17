@@ -3,6 +3,7 @@ import configV1 from "./v1/config"
 import routerV1 from "./v1/router"
 import { Bundle } from "./pkg/bundle/bundle"
 import { logContent } from "./pkg/logger/log"
+import config from "./config"
 
 /**
  *	Request logger
@@ -43,6 +44,6 @@ function getRouter(origin: string | string[]) {
 }
 
 export default {
-    dev: getRouter('*'),
-    pro: getRouter('https://some.domain')
+    dev: getRouter(config.cors.dev),
+    pro: getRouter(config.cors.pro)
 }
