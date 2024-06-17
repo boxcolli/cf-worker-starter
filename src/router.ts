@@ -23,7 +23,7 @@ function logResponse(response: Response, _: IRequest, __: Env, ___: ExecutionCon
  * @param origin CORS management
  * @returns configured router
  */
-function getRouter(origin: string) {
+function getRouter(origin: string | string[]) {
     const { preflight, corsify } = cors({
 		origin: origin,
 		maxAge: 84600,
